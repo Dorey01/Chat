@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation 'org.apache.commons:commons-lang3:3.12.0' // Example dependency, replace with your own
+
+    // Add your other dependencies here
+}
+
+application {
+    mainClassName = 'ru.ac.uniyar.testingcourse.Counter' // Set your main class here
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(JavaExec) {
+    systemProperties['file.encoding'] = 'UTF-8'
+}
