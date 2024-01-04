@@ -1,19 +1,27 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
 }
 
 repositories {
     jcenter()
 }
-
-dependencies {
-    implementation 'org.apache.commons:commons-lang3:3.12.0' // Example dependency, replace with your own
-
-    // Add your other dependencies here
+java {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
 }
 
-application {
-    mainClassName = 'ru.ac.uniyar.testingcourse.Counter' // Set your main class here
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'ru.ac.uniyar.testingcourse.Main'
+        )
+    }
+}
+
+dependencies {
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    // Add your other dependencies here
 }
 
 tasks.withType(JavaCompile) {
@@ -22,4 +30,15 @@ tasks.withType(JavaCompile) {
 
 tasks.withType(JavaExec) {
     systemProperties['file.encoding'] = 'UTF-8'
+}
+
+// Configuration for the shadowJar task
+shadowJar {
+    archiveBaseName = 'Chat' // Set your desired JAR file name
+    archiveVersion = '1.0'
+    manifest {
+        attributes(
+                'Main-Class': 'ru.ac.uniyar.testingcourse.Main'
+        )
+    }
 }
